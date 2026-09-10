@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liftway — запчасти для лифтов и эскалаторов</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="favicon-192.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="description" content="Система закупок запчастей для лифтов и эскалаторов: заявка списком или фото, КП и счёт за минуты, доставка по РФ.">
+<style>
+  :root{
+    --red:#E30613;
+    --red-dark:#C40510;
+    --dark:#16181c;
+    --dark-2:#1d2024;
+    --gray:#6B7079;
+    --gray-light:#A2A7B0;
+    --line:#C8CCD3;
+    --bg-soft:#FCE9EA;
+    --bg:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    color:var(--dark);
+    background:var(--bg);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--red);text-decoration:none;}
+  a:hover{color:var(--red-dark);}
+
+  .container{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* Header */
+  header{
+    border-bottom:1px solid var(--line);
+    background:#fff;
+    position:sticky;top:0;z-index:50;
+  }
+  .header-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:72px;gap:16px;
+  }
+  .logo svg{height:30px;width:auto;display:block;}
+  .header-contact{font-size:15px;color:var(--dark);font-weight:600;white-space:nowrap;}
+  .header-contact a{color:var(--dark);}
+  .header-contact .phone{display:block;font-size:16px;font-weight:700;}
+  .header-contact .email{font-size:13px;color:var(--gray);font-weight:400;}
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(180deg,#fff 0%,var(--bg-soft) 100%);
+    border-bottom:1px solid var(--line);
+    padding:64px 0 72px;
+  }
+  .hero-inner{display:flex;flex-direction:column;gap:24px;max-width:760px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--red);font-weight:700;font-size:14px;
+    letter-spacing:.02em;text-transform:uppercase;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--red);}
+  h1{font-size:40px;line-height:1.15;font-weight:800;letter-spacing:-.01em;}
+  .hero p.lead{font-size:18px;color:var(--gray);max-width:640px;}
+  .cta-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px;align-items:center;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--red);color:#fff;font-weight:700;font-size:16px;
+    padding:16px 28px;border-radius:8px;transition:background .15s ease,transform .05s ease;
+  }
+  .btn:hover{background:var(--red-dark);color:#fff;}
+  .btn:active{transform:translateY(1px);}
+  .btn svg{width:18px;height:18px;flex-shrink:0;}
+  .hint{font-size:14px;color:var(--gray);}
+
+  /* Sections */
+  section{padding:64px 0;}
+  section.alt{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  h2{font-size:28px;font-weight:800;letter-spacing:-.01em;margin-bottom:12px;}
+  .sub{color:var(--gray);font-size:16px;margin-bottom:32px;max-width:680px;}
+
+  /* Features grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:12px;
+    padding:24px;transition:box-shadow .15s ease,border-color .15s ease;
+  }
+  .card:hover{box-shadow:0 8px 24px rgba(22,24,28,.08);border-color:var(--gray-light);}
+  .card .num{
+    font-size:13px;font-weight:800;color:var(--red);
+    display:inline-block;margin-bottom:10px;letter-spacing:.02em;
+  }
+  .card h3{font-size:18px;font-weight:700;margin-bottom:8px;}
+  .card p{font-size:15px;color:var(--gray);}
+
+  /* How it works */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+  .step{position:relative;padding:8px 0 8px 8px;}
+  .step .dot{
+    width:40px;height:40px;border-radius:50%;
+    background:var(--red);color:#fff;font-weight:800;font-size:17px;
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+  }
+  .step h3{font-size:17px;font-weight:700;margin-bottom:6px;}
+  .step p{font-size:15px;color:var(--gray);}
+
+  /* CTA band */
+  .band{
+    background:var(--dark);color:#fff;border-radius:16px;
+    padding:48px 40px;display:flex;flex-wrap:wrap;align-items:center;gap:28px;justify-content:space-between;
+  }
+  .band h2{color:#fff;margin-bottom:6px;}
+  .band p{color:var(--gray-light);font-size:16px;max-width:520px;}
+  .band .btn{background:#fff;color:var(--dark);}
+  .band .btn:hover{background:#E9EAEC;color:var(--dark);}
+
+  /* Contacts */
+  .contacts{display:flex;flex-wrap:wrap;gap:32px;margin-top:8px;}
+  .contact-item{min-width:200px;}
+  .contact-item .label{font-size:13px;color:var(--gray);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px;}
+  .contact-item .value{font-size:18px;font-weight:700;}
+  .contact-item .value a{color:var(--dark);}
+  .contact-item .value a:hover{color:var(--red);}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:32px 0;margin-top:24px;}
+  .footer-inner{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;}
+  .footer-inner .logo svg{height:22px;}
+  .footer-note{font-size:13px;color:var(--gray);}
+
+  @media(max-width:640px){
+    h1{font-size:30px;}
+    .hero{padding:48px 0 56px;}
+    .hero p.lead{font-size:16px;}
+    .header-contact .email{display:none;}
+    .band{padding:36px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="container header-inner">
+    <a href="#top" class="logo" aria-label="Liftway">
+      <svg viewBox="0 0 385.42 129.45" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Liftway">
+        <g>
+          <path fill="#111111" d="M313.08,82.76h-31.62c4.1,16.24,10.84,42.97,11.71,46.69h30.61c-2.33-10.4-5.45-24.19-9.22-40.34-.57-2.41-1.06-4.5-1.49-6.35Z"/>
+          <path fill="#E30613" d="M381.8,0l-54.39,45.77,15.57.06-24.86,44.57c3.16,13.61,5.87,25.51,8.02,35.04l45.2-79.63,14.08-.08-3.62-45.73Z"/>
+        </g>
+        <g>
+          <path fill="#111111" d="M8.06,20.69h9.93l-6.67,40.93h24.11l-1.39,8.51H0L8.06,20.69Z"/>
+          <path fill="#111111" d="M47.56,22.44h9.66l-1.63,9.99h-9.66l1.63-9.99ZM45.1,37.91h9.52l-5.25,32.22h-9.52l5.25-32.22Z"/>
+          <path fill="#111111" d="M64.91,45.68h-5l1.27-7.77h5l.87-5.34c1.28-7.9,2.83-11.15,17.64-13.3l.29,8.58c-7.51,1.35-8.01,2.3-8.66,6.28l-.62,3.78h7.36l-1.27,7.77h-7.36l-6.13,37.59h-9.52l6.13-37.59Z"/>
+          <path fill="#111111" d="M86.8,60.54c.32-1.96,2.42-14.86,2.42-14.86h-4.39l1.27-7.77h4.39c.61-3.71,1.67-10.27,1.67-10.27l9.75-1.35s-1.2,7.36-1.89,11.62h7.77l-1.26,7.77h-7.77s-1.2,7.37-2.06,12.63c-.61,3.72.13,4.59,2.35,4.59,1.01,0,2.65-.07,4.92-.33l-.72,7.29c-2.42.34-6.18.61-8.95.61-6.69,0-8.68-2.7-7.5-9.93Z"/>
+          <path fill="#111111" d="M110.96,37.91h9.66l3.15,19.25,10.1-18.44h7.16l3.9,18.37,9.41-19.18h8.64l-16.31,32.49h-7.29l-4.31-20.4-10.96,20.4h-7.5l-5.64-32.49Z"/>
+          <path fill="#111111" d="M160.95,60.2c.56-3.45,1.38-5.95,3.43-7.36,3.26-2.16,8.27-2.7,18.88-2.7l.18-1.15c.51-3.11.12-4.46-4.06-4.46-5.2,0-8.59.47-11.86,1.01l.16-7.63c2.72-.47,7.49-1.15,13.02-1.15,10.94,0,13.67,3.17,12.41,10.88l-3.67,22.49h-8.17l-.47-3.31c-2.14,1.15-6.63,3.78-13.04,3.78-4.59,0-8.06-2.77-6.81-10.4ZM181.39,61.62l1.06-6.49c-6.21,0-8.89.27-10.32,1.15-.97.62-1.33,1.96-1.55,3.31-.5,3.04.46,3.85,3.02,3.85,2.7,0,5.92-1.08,7.79-1.82Z"/>
+          <path fill="#111111" d="M198.34,37.91h9.99s4.9,20.46,4.89,20.54l11.45-20.54h8.91l-25.96,45.73h-9.53l8.06-14.19c.01-.07-7.82-31.54-7.82-31.54Z"/>
+          <path fill="#111111" d="M232.73,59.32h12.29l-1.76,10.81h-12.29l1.76-10.81Z"/>
+          <path fill="#111111" d="M257.29,37.91h8.25l.4,3.78c2.89-1.55,7.1-3.78,12.3-4.59l-.34,8.71c-3.61.2-10.38,1.08-12.63,2.09l-3.63,22.22h-9.59l5.25-32.22Z"/>
+          <path fill="#111111" d="M280.52,62.43l4-24.52h9.52c-.68,4.19-3.24,19.86-3.42,21-.44,2.71.36,3.58,3.61,3.58,2.97,0,6.93-1.08,8.46-1.75l3.72-22.83h9.53l-5.25,32.15-8.25.07-.42-3.18c-2.15,1.15-8.94,3.85-14,3.85-5.81,0-8.44-2.5-7.49-8.37Z"/>
+        </g>
+      </svg>
+    </a>
+    <div class="header-contact">
+      <a class="phone" href="tel:+74951117733">+7 (495) 111-77-33</a>
+      <a class="email" href="mailto:support@liftway.ru">support@liftway.ru</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="container hero-inner">
+    <span class="eyebrow">Система закупок для лифтового оборудования</span>
+    <h1>Запчасти для лифтов и&nbsp;эскалаторов — с&nbsp;подбором аналогов и&nbsp;доставкой по&nbsp;РФ</h1>
+    <p class="lead">
+      Liftway — это не просто магазин, а система закупок. Отправьте заявку списком или фото шильдика —
+      получите коммерческое предложение и счёт за минуты.
+    </p>
+    <div class="cta-row">
+      <a class="btn" href="https://liftway.ru/r/MWNYAYL">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 3l9 5v8l-9 5-9-5V8l9-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M12 8v8m0 0l-3-3m3 3l3-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Подобрать запчасти
+      </a>
+      <span class="hint">Регистрация и подбор — на сайте Liftway</span>
+    </div>
+  </div>
+</section>
+
+<!-- Why -->
+<section>
+  <div class="container">
+    <h2>Почему Liftway</h2>
+    <p class="sub">Инструмент, который закрывает закупку «от заявки до отгрузки» — для сервисных организаций, монтажных бригад и закупщиков.</p>
+    <div class="grid">
+      <div class="card">
+        <span class="num">01</span>
+        <h3>Заявка в любом виде</h3>
+        <p>Список позиций, текст или фото шильдика — система разберёт запрос и подберёт нужное.</p>
+      </div>
+      <div class="card">
+        <span class="num">02</span>
+        <h3>КП и счёт за минуты</h3>
+        <p>Быстрый ответ с ценой и наличием — без долгих ожиданий менеджера.</p>
+      </div>
+      <div class="card">
+        <span class="num">03</span>
+        <h3>Подбор аналогов и OEM</h3>
+        <p>Если оригинал дорог или недоступен — предложим аналоги по совместимости.</p>
+      </div>
+      <div class="card">
+        <span class="num">04</span>
+        <h3>Доставка по всей России</h3>
+        <p>Организуем доставку до объекта или склада — в регионы по РФ.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="alt">
+  <div class="container">
+    <h2>Как это работает</h2>
+    <p class="sub">От потребности на объекте до отгрузки — четыре простых шага.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="dot">1</div>
+        <h3>Соберите заявку</h3>
+        <p>Мастер отмечает, что нужно; закупщик видит потребности по всем объектам и единицам техники.</p>
+      </div>
+      <div class="step">
+        <div class="dot">2</div>
+        <h3>Отправьте списком или фото</h3>
+        <p>Загрузите список позиций или фотографию шильдика — больше ничего не нужно.</p>
+      </div>
+      <div class="step">
+        <div class="dot">3</div>
+        <h3>Получите КП и счёт</h3>
+        <p>Коммерческое предложение с ценами и счёт приходят за минуты.</p>
+      </div>
+      <div class="step">
+        <div class="dot">4</div>
+        <h3>Получите заказ</h3>
+        <p>Ведение до отгрузки и доставка по РФ — на всём пути закупки.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="container">
+    <div class="band">
+      <div>
+        <h2>Готовы оформить закупку?</h2>
+        <p>Перейдите на Liftway, чтобы зарегистрироваться и отправить первую заявку.</p>
+      </div>
+      <a class="btn" href="https://liftway.ru/r/MWNYAYL">Перейти на Liftway</a>
+    </div>
+  </div>
+</section>
+
+<!-- Contacts -->
+<section id="contacts">
+  <div class="container">
+    <h2>Контакты</h2>
+    <div class="contacts">
+      <div class="contact-item">
+        <div class="label">Телефон</div>
+        <div class="value"><a href="tel:+74951117733">+7 (495) 111-77-33</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="label">Электронная почта</div>
+        <div class="value"><a href="mailto:support@liftway.ru">support@liftway.ru</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="label">Сайт</div>
+        <div class="value"><a href="https://liftway.ru/r/MWNYAYL">liftway.ru</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container footer-inner">
+    <a href="#top" class="logo" aria-label="Liftway">
+      <svg viewBox="0 0 385.42 129.45" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <path fill="#111111" d="M313.08,82.76h-31.62c4.1,16.24,10.84,42.97,11.71,46.69h30.61c-2.33-10.4-5.45-24.19-9.22-40.34-.57-2.41-1.06-4.5-1.49-6.35Z"/>
+          <path fill="#E30613" d="M381.8,0l-54.39,45.77,15.57.06-24.86,44.57c3.16,13.61,5.87,25.51,8.02,35.04l45.2-79.63,14.08-.08-3.62-45.73Z"/>
+        </g>
+        <g>
+          <path fill="#111111" d="M8.06,20.69h9.93l-6.67,40.93h24.11l-1.39,8.51H0L8.06,20.69Z"/>
+          <path fill="#111111" d="M47.56,22.44h9.66l-1.63,9.99h-9.66l1.63-9.99ZM45.1,37.91h9.52l-5.25,32.22h-9.52l5.25-32.22Z"/>
+          <path fill="#111111" d="M64.91,45.68h-5l1.27-7.77h5l.87-5.34c1.28-7.9,2.83-11.15,17.64-13.3l.29,8.58c-7.51,1.35-8.01,2.3-8.66,6.28l-.62,3.78h7.36l-1.27,7.77h-7.36l-6.13,37.59h-9.52l6.13-37.59Z"/>
+          <path fill="#111111" d="M86.8,60.54c.32-1.96,2.42-14.86,2.42-14.86h-4.39l1.27-7.77h4.39c.61-3.71,1.67-10.27,1.67-10.27l9.75-1.35s-1.2,7.36-1.89,11.62h7.77l-1.26,7.77h-7.77s-1.2,7.37-2.06,12.63c-.61,3.72.13,4.59,2.35,4.59,1.01,0,2.65-.07,4.92-.33l-.72,7.29c-2.42.34-6.18.61-8.95.61-6.69,0-8.68-2.7-7.5-9.93Z"/>
+          <path fill="#111111" d="M110.96,37.91h9.66l3.15,19.25,10.1-18.44h7.16l3.9,18.37,9.41-19.18h8.64l-16.31,32.49h-7.29l-4.31-20.4-10.96,20.4h-7.5l-5.64-32.49Z"/>
+          <path fill="#111111" d="M160.95,60.2c.56-3.45,1.38-5.95,3.43-7.36,3.26-2.16,8.27-2.7,18.88-2.7l.18-1.15c.51-3.11.12-4.46-4.06-4.46-5.2,0-8.59.47-11.86,1.01l.16-7.63c2.72-.47,7.49-1.15,13.02-1.15,10.94,0,13.67,3.17,12.41,10.88l-3.67,22.49h-8.17l-.47-3.31c-2.14,1.15-6.63,3.78-13.04,3.78-4.59,0-8.06-2.77-6.81-10.4ZM181.39,61.62l1.06-6.49c-6.21,0-8.89.27-10.32,1.15-.97.62-1.33,1.96-1.55,3.31-.5,3.04.46,3.85,3.02,3.85,2.7,0,5.92-1.08,7.79-1.82Z"/>
+          <path fill="#111111" d="M198.34,37.91h9.99s4.9,20.46,4.89,20.54l11.45-20.54h8.91l-25.96,45.73h-9.53l8.06-14.19c.01-.07-7.82-31.54-7.82-31.54Z"/>
+          <path fill="#111111" d="M232.73,59.32h12.29l-1.76,10.81h-12.29l1.76-10.81Z"/>
+          <path fill="#111111" d="M257.29,37.91h8.25l.4,3.78c2.89-1.55,7.1-3.78,12.3-4.59l-.34,8.71c-3.61.2-10.38,1.08-12.63,2.09l-3.63,22.22h-9.59l5.25-32.22Z"/>
+          <path fill="#111111" d="M280.52,62.43l4-24.52h9.52c-.68,4.19-3.24,19.86-3.42,21-.44,2.71.36,3.58,3.61,3.58,2.97,0,6.93-1.08,8.46-1.75l3.72-22.83h9.53l-5.25,32.15-8.25.07-.42-3.18c-2.15,1.15-8.94,3.85-14,3.85-5.81,0-8.44-2.5-7.49-8.37Z"/>
+        </g>
+      </svg>
+    </a>
+    <div class="footer-note">Liftway — запчасти для лифтов и эскалаторов. Заявка списком или фото → КП и счёт за минуты → доставка по РФ.</div>
+  </div>
+</footer>
+
+</body>
+</html>

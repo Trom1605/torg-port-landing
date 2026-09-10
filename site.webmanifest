@@ -1,0 +1,9 @@
+{
+  "name": "Liftway — запчасти для лифтов и эскалаторов",
+  "short_name": "Liftway",
+  "icons": [
+    { "src": "favicon-192.png", "sizes": "192x192", "type": "image/png" }
+  ],
+  "start_url": "/",
+  "display": "standalone"
+}
